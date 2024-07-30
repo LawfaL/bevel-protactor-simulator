@@ -1,17 +1,19 @@
 let angle = 0;
 
 function setup() {
-  createCanvas(2000, 2000);
+  createCanvas(windowWidth - 5, windowHeight - 5);
   rectMode(CENTER);
 }
 
 function draw() {
   background(0);
-  translate(width / 2, height / 2);
+  translate(width / 2 - 200, height / 2);
   angle = atan2(mouseY - height / 2, mouseX - width / 2);
 
   // rotate(angle);
   mainDisc();
+   
+
 }
 
 function disc() {
