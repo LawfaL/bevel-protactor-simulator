@@ -1,12 +1,13 @@
 let angle = 0;
+
 function setup() {
-  createCanvas(5000, 5000);
+  createCanvas(2000, 2000);
   rectMode(CENTER);
 }
 
 function draw() {
+  background(0);
   translate(width / 2, height / 2);
-  background(210);
   angle = atan2(mouseY - height / 2, mouseX - width / 2);
 
   // rotate(angle);
@@ -17,7 +18,6 @@ function disc() {
   let centerX = 0;
   let centerY = 0; // Move the center down a bit for better positioning
   let radius = 300;
-  let bevelSize = 10;
 
   // Draw the bottom bevel
   fill(160); // Darker shade for the bottom bevel
@@ -63,7 +63,6 @@ function vernierScale() {
   let centerX = 0;
   let centerY = 0; // Move the center down a bit for better positioning
   let radius = 300;
-  let bevelSize = 100;
 
   // Draw the bottom bevel
   fill(210); // Darker shade for the bottom bevel
