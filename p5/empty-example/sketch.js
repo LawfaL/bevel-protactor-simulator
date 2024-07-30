@@ -1,6 +1,6 @@
 let angle = 0;
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(5000, 5000);
   rectMode(CENTER);
 }
 
@@ -10,17 +10,10 @@ function draw() {
   angle = atan2(mouseY - height / 2, mouseX - width / 2);
 
   // rotate(angle);
-
-  push();
-  disk();
-  pop();
-
-  push();
-  vernierScale();
-  pop();
+  mainDisc();
 }
 
-function disk() {
+function disc() {
   let centerX = 0;
   let centerY = 0; // Move the center down a bit for better positioning
   let radius = 300;
@@ -80,8 +73,8 @@ function vernierScale() {
   fill(240); // Darker shade for the bottom bevel
   circle(0, 0, 500);
 
-  push()
-  rotate(0.15)
+  push();
+  rotate(0.15);
   beginShape();
   fill(210); // Darker shade for the bottom bevel
   for (let angle = 0; angle <= 80; angle++) {
@@ -95,7 +88,7 @@ function vernierScale() {
     vertex(x, y);
   }
   endShape(CLOSE);
-  pop()
+  pop();
 
   // Draw the tick marks
   for (let angle = 0; angle <= 60; angle++) {
@@ -130,6 +123,90 @@ function vernierScale() {
     let y = centerY - sin(radians(angle)) * numberRadius;
     text(angle, x, y);
   }
+}
+
+function protractorBlade(x, y, width, height) {
+  // Draw the trapezoid
+  fill(200);
+
+  beginShape();
+  vertex(x, y);
+  vertex(x + width, y);
+  vertex(x + width + 200, y + height);
+  vertex(x - 200, y + height);
+  endShape(CLOSE);
+
+  fill(190);
+  beginShape();
+  vertex(x - 80, y + height / 2 - 20);
+  vertex(x + width + 80, y + height / 2 - 20);
+  vertex(x + width + 100, y + height / 2);
+  vertex(x - 100, y + height / 2);
+  endShape(CLOSE);
+
+  beginShape();
+  
+  endShape(CLOSE);
+}
+
+function mainDisc() {
+  // push()
+  // protractorBlade(-100, 200, 1000);
+  // pop()
+
+  push();
+  fill(100);
+  beginShape();
+  vertex(0, 390);
+  vertex(1200, 390);
+  vertex(1200, 250);
+  vertex(0, 250);
+  endShape(CLOSE);
+  pop();
+
+  push();
+  disc();
+  pop();
+
+  push();
+  vernierScale();
+  pop();
+
+  push();
+  protractorBlade(-450, 160, 1200, 200);
+  pop();
+  handLock();
+}
+
+function handLock() {
+  // Define the rectangle properties
+  let x = -50;
+  let y = 0;
+  let w = 100;
+  let h = 300;
+  let r = 55; // Corner radius
+
+  // Draw the rectangle with two rounded corners (top-right and bottom-right)
+  beginShape();
+  // Top-left corner
+  vertex(x, y + r);
+  quadraticVertex(x, y, x + r, y);
+
+  // Top-right corner
+  vertex(x + w - r, y);
+  quadraticVertex(x + w, y, x + w, y + r);
+
+  // Bottom-right corner
+  vertex(x + w, y + h);
+
+  // Bottom-left corner
+  vertex(x, y + h);
+  endShape(CLOSE);
+
+  circle(0, 50, 100);
+  circle(0, 50, 80);
+  circle(0, 50, 20);
+  circle(0, 250, 30);
 }
 
 // function vernierScale() {
