@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG.js</title>
+  </head>
+  <style>
+    #bevel {
+      position: relative;
+      height: 130em;
+      width: 130em;
+    }
+
+    #control {
+      position: relative;
+      height: 130em;
+      top: 5em;
+    }
+
+    #main {
+      /* display: none; */
+      position: absolute;
+      height: 130em;
+      width: auto;
+    }
+
+    #vernier {
+      /* display: none; */
+      position: absolute;
+      height: 130em;
+      top: 16.7em;
+      left: 17em;
+    }
+
+    #blade {
+      /* display: none; */
+      height: 24em;
+    }
+
+    #hand {
+      position: absolute;
+      width: 25em;
+      height: 150em;
+      transform: rotate(60deg);
+      background-color: #ff9955ff;
+      transform-origin: 330% 130%;
+    }
+  </style>
+  <body>
+    <div id="bevel">
+      <div id="control">
+        <div draggable="true" id="hand" ondragend="rotate(event)" ondrag="rotate(event)"></div>
+        <img id="main" src="main.png" />
+        <img id="vernier" src="vernier.png" />
+      </div>
+      <img id="blade" src="blade.png" />
+    </div>
+  </body>
+
+  <script>
+    function rotate(e) {
+      const el = document.getElementById('hand')
+      el.style.setProperty('transform', `rotate(${e.pageY%360}deg)`)
+      console.log(e.pageY);
+    }
+  </script>
+</html>
