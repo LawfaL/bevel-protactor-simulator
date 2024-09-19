@@ -1,25 +1,26 @@
 class VernierScale {
-  constructor(x, y, radius, circleRadius) {
+  constructor(x, y, radius, circleRadius, textSize) {
     this.x = x
     this.y = y
     this.radius = radius
     this.circleRadius = circleRadius
+    this.textSize = textSize
   }
   render() {
     // Draw the bottom bevel
     fill(210); // Darker shade for the bottom bevel
-    circle(0, 0, 600);
+    circle(0, 0, this.circleRadius);
 
     // Draw the bottom bevel
     fill(240); // Darker shade for the bottom bevel
-    circle(0, 0, 500);
+    circle(0, 0, this.circleRadius - 100);
 
     push();
     beginShape();
     fill(210); // Darker shade for the bottom bevel
     for (let angle = 75; angle <= 105; angle++) {
-      let x = this.x + cos(radians(angle)) * (this.radius - 100);
-      let y = this.y - sin(radians(angle)) * (this.radius - 100);
+      let x = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.5);
+      let y = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.5);
       vertex(x, y);
     }
     for (let angle = 105; angle >= 75; angle--) {
@@ -54,7 +55,7 @@ class VernierScale {
     }
 
     // Draw the numbers
-    textSize(9);
+    textSize(this.textSize);
     let i = 0;
     let iteration = [60, 30, 0, 30, 60];
 

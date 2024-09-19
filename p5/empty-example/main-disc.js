@@ -4,16 +4,18 @@ class MainDisc {
     this.centerY = centerY;
     this.radius = radius;
     this.circleRadius = circleRadius;
-    this.textSize = textSize
+    this.textSize = textSize;
   }
 
   render() {
+    rotate(this.angle);
+
     fill(100);
     beginShape();
-    vertex(0, 390);
-    vertex(800, 390);
-    vertex(800, 250);
-    vertex(0, 250);
+    vertex(0, this.circleRadius * 0.3);
+    vertex(this.circleRadius, this.circleRadius * 0.3);
+    vertex(this.circleRadius, this.circleRadius * 0.5);
+    vertex(0, this.circleRadius * 0.5);
     endShape(CLOSE);
 
     // Draw the bottom bevel

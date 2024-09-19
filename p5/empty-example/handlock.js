@@ -10,10 +10,10 @@ class HandLock {
   render() {
     beginShape();
     vertex(this.x, this.y + this.radius);
-    quadraticVertex(this.x, this.y, this.x + this.radius, this.y);
+    quadraticVertex(this.x, this.y, this.x + this.radius / 1.5, this.y);
 
     // Top-right corner
-    vertex(this.x + this.width - this.radius, this.y);
+    vertex(this.x + this.width - this.radius / 1.5, this.y);
     quadraticVertex(this.x + this.width, this.y, this.x + this.width, this.y + this.radius);
 
     // Bottom-right corner
@@ -23,9 +23,8 @@ class HandLock {
     vertex(this.x, this.y + this.height);
     endShape(CLOSE);
 
-    circle(0, this.y + 50, 100);
-    circle(0, this.y + 50, 80);
-    circle(0, this.y + 50, 20);
-    circle(0, this.y + 400, 30);
+    circle(0, this.y + 35, this.width * 0.9);
+    circle(0, this.y + 35, 20);
+    circle(0, this.y + this.height - 35, this.width * 0.4);
   }
 }
