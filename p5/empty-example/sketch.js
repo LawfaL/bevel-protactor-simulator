@@ -2,9 +2,10 @@ let angle = 0;
 let mode = "";
 let discAngle = 0;
 let vernierAngle = 0;
+let bladePosition = 0;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth - 4, windowHeight - 4);
   // rectMode(CENTER);
 }
 
@@ -30,7 +31,14 @@ function draw() {
   text("Vernier Disc", 65, 115);
   pop();
 
-  translate(width / 2, height / 2);
+  push();
+  rect(20, 140, 200, 50);
+  fill(0);
+  textSize(24);
+  text("Blade", 65, 175);
+  pop();
+
+  translate(width / 2 - 50, height / 2 - 50);
 
   push();
   if (mode == "main-disc") {
@@ -46,7 +54,13 @@ function draw() {
   }
   rotate(vernierAngle);
   vernierScale.render();
+  push();
+  if (mode == "blade" && mouseX < blade.width + 230 && mouseX > blade.width - 500) {
+    bladePosition = mouseX - blade.width;
+  }
+  translate(bladePosition, 0);
   blade.render();
+  pop();
   handLock.render();
   pop();
 }
@@ -60,6 +74,11 @@ function mousePressed() {
 
   if (mouseX >= 20 && mouseX <= 220 && mouseY >= 80 && mouseY <= 130) {
     mode = "vernier";
+    return;
+  }
+
+  if (mouseX >= 20 && mouseX <= 220 && mouseY >= 80 && mouseY <= 180) {
+    mode = "blade";
     return;
   }
 

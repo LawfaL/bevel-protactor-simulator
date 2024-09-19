@@ -8,6 +8,8 @@ class HandLock {
   }
 
   render() {
+    fill(200);
+
     beginShape();
     vertex(this.x, this.y + this.radius);
     quadraticVertex(this.x, this.y, this.x + this.radius / 1.5, this.y);
