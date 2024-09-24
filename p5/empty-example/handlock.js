@@ -11,22 +11,22 @@ class HandLock {
     fill(200);
 
     beginShape();
-    vertex(this.x, this.y + this.radius);
-    quadraticVertex(this.x, this.y, this.x + this.radius / 1.5, this.y);
+    vertex(this.x - this.width * 0.5, this.y - this.width * 0.7 + this.radius);
+    quadraticVertex(this.x - this.width * 0.5, this.y - this.width * 0.7, this.x - this.width * 0.5 + this.radius * 0.6, this.y - this.width * 0.7);
 
     // Top-right corner
-    vertex(this.x + this.width - this.radius / 1.5, this.y);
-    quadraticVertex(this.x + this.width, this.y, this.x + this.width, this.y + this.radius);
+    vertex(this.x - this.width * 0.5 + this.width - this.radius * 0.6, this.y - this.width * 0.7);
+    quadraticVertex(this.x - this.width * 0.5 + this.width, this.y - this.width * 0.7, this.x - this.width * 0.5 + this.width, this.y - this.width * 0.7 + this.radius);
 
     // Bottom-right corner
-    vertex(this.x + this.width, this.y + this.height);
+    vertex(this.x - this.width * 0.5 + this.width, this.y - this.width * 0.7 + this.height);
 
     // Bottom-left corner
-    vertex(this.x, this.y + this.height);
+    vertex(this.x - this.width * 0.5, this.y - this.width * 0.7 + this.height);
     endShape(CLOSE);
 
-    circle(0, this.y + 35, this.width * 0.9);
-    circle(0, this.y + 35, 20);
-    circle(0, this.y + this.height - 35, this.width * 0.4);
+    circle(0, this.y, this.width * 0.9);
+    circle(0, this.y, 20);
+    circle(0, this.y + this.height - this.width * 1, this.width * 0.4);
   }
 }

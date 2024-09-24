@@ -7,20 +7,21 @@ class VernierScale {
     this.textSize = textSize
   }
   render() {
+    strokeWeight(0.2);
     // Draw the bottom bevel
     fill(210); // Darker shade for the bottom bevel
     circle(0, 0, this.circleRadius);
 
     // Draw the bottom bevel
     fill(240); // Darker shade for the bottom bevel
-    circle(0, 0, this.circleRadius - 100);
+    circle(0, 0, this.circleRadius - this.circleRadius * 0.4);
 
     push();
     beginShape();
     fill(210); // Darker shade for the bottom bevel
     for (let angle = 75; angle <= 105; angle++) {
-      let x = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.5);
-      let y = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.5);
+      let x = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.4);
+      let y = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.4);
       vertex(x, y);
     }
     for (let angle = 105; angle >= 75; angle--) {
@@ -35,21 +36,21 @@ class VernierScale {
     for (let angle = 78, i = 0; angle < 103; angle++, i++) {
       let x1 = this.x + cos(radians(angle)) * this.radius;
       let y1 = this.y - sin(radians(angle)) * this.radius;
-      let x2 = this.x + cos(radians(angle)) * (this.radius - 20);
-      let y2 = this.y - sin(radians(angle)) * (this.radius - 20);
+      let x2 = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.1);
+      let y2 = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.1);
       line(x1, y1, x2, y2);
 
       if (i % 3 == 0) {
         //  Draw longer lines every 30 degrees
-        x2 = this.x + cos(radians(angle)) * (this.radius - 30);
-        y2 = this.y - sin(radians(angle)) * (this.radius - 30);
+        x2 = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.2);
+        y2 = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.2);
         line(x1, y1, x2, y2);
       }
 
       if (i % 6 == 0) {
         // Draw longer lines every 30 degrees
-        x2 = this.x + cos(radians(angle)) * (this.radius - 40);
-        y2 = this.y - sin(radians(angle)) * (this.radius - 40);
+        x2 = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.3);
+        y2 = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.3);
         line(x1, y1, x2, y2);
       }
     }
@@ -62,8 +63,8 @@ class VernierScale {
     textAlign(CENTER, CENTER);
     fill(0);
     for (let angle = 78; angle <= 200; angle += 6) {
-      let x = this.x + cos(radians(angle)) * (this.radius - 50);
-      let y = this.y - sin(radians(angle)) * (this.radius - 50);
+      let x = this.x + cos(radians(angle)) * (this.radius - this.radius * 0.35);
+      let y = this.y - sin(radians(angle)) * (this.radius - this.radius * 0.35);
       text(iteration[i], x, y);
       i++;
     }

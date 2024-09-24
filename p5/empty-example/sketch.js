@@ -5,40 +5,80 @@ let vernierAngle = 0;
 let bladePosition = 0;
 
 function setup() {
-  createCanvas(windowWidth - 4, windowHeight - 4);
+  createCanvas(windowWidth, windowHeight);
   // rectMode(CENTER);
 }
 
 function draw() {
   background(0);
+  console.log("windowWidth", windowWidth);
 
-  let disc = new MainDisc(0, 0, 450, 150, 11);
-  let vernierScale = new VernierScale(0, 0, 160, 320, 8);
-  let blade = new ProtractorBlade(-200, 190, 700, 90);
-  let handLock = new HandLock(-35, -35, 70, 300, 55);
+  let disc = new MainDisc(
+    0,
+    0,
+    windowHeight * 0.7,
+    windowHeight * 0.15,
+    windowHeight * 0.015
+  );
+  let vernierScale = new VernierScale(
+    0,
+    0,
+    windowHeight * 0.2,
+    windowHeight * 0.4,
+    windowHeight * 0.008
+  );
+  let blade = new ProtractorBlade(
+    0,
+    disc.radius * 2,
+    windowHeight,
+    windowHeight * 0.1
+  );
+  let handLock = new HandLock(
+    0,
+    0,
+    windowHeight * 0.1,
+    disc.radius * 3,
+    disc.radius * 0.5
+  );
 
   push();
   rect(20, 20, 200, 50);
   fill(0);
-  textSize(24);
+  textSize(windowHeight * 0.05);
   text("Main Disc", 65, 55);
   pop();
 
   push();
   rect(20, 80, 200, 50);
   fill(0);
-  textSize(24);
+  textSize(windowHeight * 0.05);
   text("Vernier Disc", 65, 115);
   pop();
 
   push();
   rect(20, 140, 200, 50);
   fill(0);
-  textSize(24);
+  textSize(windowHeight * 0.05);
   text("Blade", 65, 175);
   pop();
 
-  translate(width / 2 - 50, height / 2 - 50);
+  push();
+  textSize(this.textSize);
+  fill(255);
+  for (let angle = 0; angle <= discAngle; angle += 10) {
+    push();
+    textAlign(CENTER, CENTER);
+    let x = windowWidth - 200 + cos(radians(angle)) * (200 + 60);
+    let y = 20 - sin(radians(angle)) * (200 + 60);
+    translate(x, y);
+    rotate(-radians(angle) - radians(270));
+    text(angle, 0, 0);
+    pop();
+  }
+  fill(0);
+  pop();
+
+  translate(width / 2, height / 2);
 
   push();
   if (mode == "main-disc") {
@@ -55,7 +95,7 @@ function draw() {
   rotate(vernierAngle);
   vernierScale.render();
   push();
-  if (mode == "blade" && mouseX < blade.width + 230 && mouseX > blade.width - 500) {
+  if (mode == "blade" && mouseX < width / 2 - 20 && mouseX > 0) {
     bladePosition = mouseX - blade.width;
   }
   translate(bladePosition, 0);
@@ -83,4 +123,8 @@ function mousePressed() {
   }
 
   mode = "";
+}
+
+function mouseReleased() {
+  // mode = "";
 }

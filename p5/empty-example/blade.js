@@ -24,5 +24,6 @@ class ProtractorBlade {
     vertex(this.x + this.width + this.width * 0.05, this.y + this.height / 2);
     vertex(this.x - this.width * 0.05, this.y + this.height / 2);
     endShape(CLOSE);
+
   }
 }
