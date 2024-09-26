@@ -3,15 +3,24 @@ let mode = "";
 let discAngle = 0;
 let vernierAngle = 0;
 let bladePosition = 0;
+let sf = 1; // scaleFactor
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight);
   // rectMode(CENTER);
 }
 
 function draw() {
+  mx = mouseX;
+  my = mouseY;
+
   background(0);
-  console.log("windowWidth", windowWidth);
+  if (mode == "zoom") {
+    translate(mx, my);
+    scale(sf);
+    translate(-mx, -my);
+    translate();
+  }
 
   let disc = new MainDisc(
     0,
@@ -44,22 +53,29 @@ function draw() {
   push();
   rect(20, 20, 200, 50);
   fill(0);
-  textSize(windowHeight * 0.05);
+  textSize(windowHeight * 0.02);
   text("Main Disc", 65, 55);
   pop();
 
   push();
   rect(20, 80, 200, 50);
   fill(0);
-  textSize(windowHeight * 0.05);
+  textSize(windowHeight * 0.02);
   text("Vernier Disc", 65, 115);
   pop();
 
   push();
   rect(20, 140, 200, 50);
   fill(0);
-  textSize(windowHeight * 0.05);
+  textSize(windowHeight * 0.02);
   text("Blade", 65, 175);
+  pop();
+
+  push();
+  rect(20, 200, 200, 50);
+  fill(0);
+  textSize(windowHeight * 0.02);
+  text("Zoom", 65, 245);
   pop();
 
   push();
@@ -117,8 +133,14 @@ function mousePressed() {
     return;
   }
 
-  if (mouseX >= 20 && mouseX <= 220 && mouseY >= 80 && mouseY <= 180) {
+  if (mouseX >= 20 && mouseX <= 220 && mouseY >= 140 && mouseY <= 180) {
     mode = "blade";
+    return;
+  }
+
+  if (mouseX >= 20 && mouseX <= 220 && mouseY >= 200 && mouseY <= 240) {
+    mode = "zoom";
+    console.log('zoom')
     return;
   }
 
@@ -128,3 +150,8 @@ function mousePressed() {
 function mouseReleased() {
   // mode = "";
 }
+
+window.addEventListener("wheel", function (e) {
+  if (e.deltaY > 0) sf *= 1.05;
+  else sf *= 0.95;
+});
